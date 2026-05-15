@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clima — 7 días y por horas</title>
+  <link rel="stylesheet" href="./clima.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="clima-canvas-bg" class="clima-canvas-bg" aria-hidden="true"></canvas>
+  <div class="clima-layout">
+    <aside class="feed-aside" id="trump-aside" aria-labelledby="trump-aside-title">
+      <div class="feed-aside__head">
+        <h2 class="feed-aside__title" id="trump-aside-title">Donald Trump</h2>
+        <button
+          type="button"
+          class="feed-aside__collapse"
+          id="trump-aside-toggle"
+          aria-expanded="true"
+          aria-controls="trump-aside-panel"
+          title="Plegar panel"
+        >
+          <span class="feed-aside__collapse-icon" aria-hidden="true">«</span>
+        </button>
+      </div>
+      <div class="feed-aside__panel" id="trump-aside-panel">
+        <p class="feed-aside__subtitle">Último titular indexado en noticias</p>
+        <p class="feed-aside__meta" id="trump-feed-meta"></p>
+        <div class="feed-aside__body" id="trump-feed-body">
+          <p class="feed-aside__loading" id="trump-feed-loading">Cargando…</p>
+        </div>
+        <div class="feed-aside__actions">
+          <button type="button" class="feed-aside__btn" id="trump-feed-refresh">Actualizar</button>
+          <a class="feed-aside__link" href="https://truthsocial.com/@realDonaldTrump" target="_blank" rel="noopener noreferrer">Ver Truth Social</a>
+        </div>
+      </div>
+    </aside>
+    <main class="clima-main">
+  <div class="app">
+    <header class="header">
+      <h1>Clima</h1>
+      <p class="subtitle">Datos de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (gratis, sin API key)</p>
+      <div class="view-toggle" role="group" aria-label="Vista del pronóstico">
+        <button type="button" class="toggle is-active" id="btn-view-daily" aria-pressed="true">7 días</button>
+        <button type="button" class="toggle" id="btn-view-hourly" aria-pressed="false">Por horas</button>
+      </div>
+      <form class="search" id="search-form" autocomplete="off">
+        <input type="search" id="city-input" placeholder="Buscar ciudad (ej. Barcelona)" aria-label="Ciudad" />
+        <button type="submit">Buscar</button>
+        <button type="button" class="btn-secondary" id="btn-geo" title="Usar mi ubicación">Mi ubicación</button>
+      </form>
+      <p class="location" id="location-label">Cargando…</p>
+    </header>
+
+    <div id="panel-daily">
+      <section class="today" id="today-card" hidden>
+        <div class="today-main">
+          <span class="today-icon" id="today-icon" aria-hidden="true"></span>
+          <div>
+            <p class="today-temp" id="today-temp">—</p>
+            <p class="today-desc" id="today-desc">—</p>
+          </div>
+        </div>
+        <ul class="today-meta" id="today-meta"></ul>
+      </section>
+      <ul class="forecast" id="forecast-list" aria-live="polite"></ul>
+    </div>
+
+    <div id="panel-hourly" class="panel-hourly" hidden>
+      <p class="hourly-hint" id="hourly-hint"></p>
+      <div class="hourly-scroll">
+        <table class="hourly-table" id="hourly-table">
+          <thead id="hourly-thead"></thead>
+          <tbody id="hourly-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="error" id="error-msg" hidden role="alert"></p>
+  </div>
+    </main>
+  </div>
+  <script type="module" src="./clima-bg.js"></script>
+  <script type="module" src="./clima.js"></script>
+</body>
+</html>
